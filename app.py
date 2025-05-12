@@ -8,7 +8,7 @@ app.secret_key = "sikkernøkkel"  # For session
 # Koble til database
 def get_db_connection():
     return mysql.connector.connect(
-        host="10.2.2.14",
+        host="10.2.1.177",
         user="frendon",
         password="MariaJa81",
         database="galleridb"
@@ -60,7 +60,7 @@ def register():
         if existing_user:
             return "Username already taken, please choose another", 400
         
-        cursor.execute("INSERT INTO users (username, password_hash) VALUES (%s, %s)", (username, hashed_password))  # Use 'password_hash' here
+        cursor.execute("INSERT INTO users (username, password_hash) VALUES (%s, %s)", (username, hashed_password))  #Bruk 'password_hash' her som i databasen
         conn.commit()
         conn.close()    
 
@@ -75,8 +75,11 @@ def galleri():
         return redirect('/login')
 
     # Statisk bilder for galleriet
-    images = ['image1.jpg', 'image2.jpg', 'image3.jpg']
-    
+    images = [
+        {"filename": "image1.jpg", "description": "Solsikke blomst som er vakkert som sola."},
+        {"filename": "image2.jpg", "description": "Blomst som vekker mange følelser."},
+        {"filename": "image3.jpg", "description": "Fugler som blender inn med skogen."}
+    ]
     return render_template('galleri.html', images=images)
 
 @app.route('/logout')
