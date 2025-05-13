@@ -58,7 +58,7 @@ def register():
         existing_user = cursor.fetchone()
 
         if existing_user:
-            return "Username already taken, please choose another", 400
+            return "Brukernavn er allerede tatt, bruk et annet.", 400
         
         cursor.execute("INSERT INTO users (username, password_hash) VALUES (%s, %s)", (username, hashed_password))  #Bruk 'password_hash' her som i databasen
         conn.commit()
