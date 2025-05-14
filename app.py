@@ -38,9 +38,10 @@ def login():
         user = cursor.fetchone()
         conn.close()
 
-        if user and verify_password(user["password_hash"], password):  # Bruke det hasha passordet her
-            session['user_id'] = user["id"]
-            return redirect('/galleri')
+    if user and verify_password(user["password_hash"], password):
+        session['user_id'] = user["id"]
+        session['username'] = user["username"]  
+        return redirect('/galleri')
         
     return render_template('login.html')
 
@@ -74,13 +75,16 @@ def galleri():
     if 'user_id' not in session:
         return redirect('/login')
 
+    username = session.get('username') 
+
     # Statisk bilder for galleriet
     images = [
-        {"filename": "image1.jpg", "description": "Solsikke blomst som er vakkert som sola."},
-        {"filename": "image2.jpg", "description": "Blomst som vekker mange følelser."},
-        {"filename": "image3.jpg", "description": "Fugler som blender inn med skogen."}
+        {"filename": "image1.jpg", "description": "Lilla blomster ved Aker Brygge (Canon 600D)"},
+        {"filename": "image2.jpg", "description": "Inbetween. Bilde tatt av Frendon(Canon 600D)"},
+        {"filename": "image3.jpg", "description": "Sørenga. Bilde tatt av Frendon(Canon 600D)"},
+        {"filename": "image4.jpg", "description": " Maserati bil. Bilde tatt av Frendon (Canon 600D)"}
     ]
-    return render_template('galleri.html', images=images)
+    return render_template('galleri.html', images=images, username=username)
 
 @app.route('/logout')
 def logout():

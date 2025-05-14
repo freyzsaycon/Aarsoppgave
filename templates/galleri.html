@@ -8,7 +8,8 @@
 </head>
 <body>
     <div class="container">
-        <h2>Velkommen til galleriet</h2>
+        <h2> Hei {{username }}!</h2>
+        <h2>Velkommen til Galleriet</h2>
         <div class="gallery">
             {% for image in images %}
                 <div class="image-box">
@@ -16,7 +17,8 @@
                     <p>{{ image.description }}</p>
                 </div>
             {% endfor %}
+            <a class="logout" id="logout" href="/logout">Logout</a>
         </div>
-        <a href="/logout">Logout</a>
+        
 </body>
 </html>
