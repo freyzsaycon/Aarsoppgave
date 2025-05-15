@@ -42,11 +42,16 @@ def login():
         user = cursor.fetchone()
         conn.close()
 
-    if user and verify_password(user["password_hash"], password):
-        session['user_id'] = user["id"]
-        session['username'] = user["username"]  
-        return redirect('/galleri')
-        
+        if user is not None:
+            if verify_password(user["password_hash"], password):  
+                session['user_id'] = user["id"]
+                session['username'] = user["username"]
+                return redirect('/galleri')
+            else:
+                return "Feil passord"
+        else:
+            return "Bruker finnes ikke"
+
     return render_template('login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
