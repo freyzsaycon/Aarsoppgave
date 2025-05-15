@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request, redirect, session
 import mysql.connector
 import hashlib
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = "sikkernøkkel"  # For session
@@ -8,10 +12,10 @@ app.secret_key = "sikkernøkkel"  # For session
 # Koble til database
 def get_db_connection():
     return mysql.connector.connect(
-        host="10.2.1.177",
-        user="frendon",
-        password="MariaJa81",
-        database="galleridb"
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME")
     )
 
 # Hashe passordet med hashlib
