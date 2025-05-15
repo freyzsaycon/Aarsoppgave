@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = "sikkernøkkel"  # For session
+app.secret_key = os.environ.get("SECRET_KEY")  # For session
 
 # Koble til database
 def get_db_connection():
