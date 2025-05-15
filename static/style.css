@@ -5,7 +5,7 @@ body {
 }
 
 .container {
-    width: 400px;
+    width: 700px;
     margin: 100px auto;
     padding: 20px;
     background: white;
@@ -53,7 +53,7 @@ button:hover {
 }
 
 .image-box img {
-    width: 100%;
+    width: 70%;
     border-radius: 5px;
     box-shadow: 0px 1px 5px;
 }
