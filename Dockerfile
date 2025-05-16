@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install flask mysql-connector-python
+RUN pip install flask mysql-connector-python python-dotenv
 
 EXPOSE 5000
 
